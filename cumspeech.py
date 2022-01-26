@@ -1,10 +1,11 @@
 import requests
 import os
 import dotenv
+from jew import jwtiam 
 dotenv.load_dotenv()
 
 def cmspch():
-    IAM_TOKEN = os.environ['IAM_TOKEN']
+    IAM_TOKEN = jwtiam()
     FOLDER_ID = os.environ['FOLDER_ID']
     headers = {'Authorization': f'Bearer {IAM_TOKEN}'}
     file = open('uploads/speech.ogg', "rb")
