@@ -1,16 +1,24 @@
 import time
 import jwt
 import requests
+import os
 
-service_account_id = "ajevquifrhs1lfrcfsas"
-key_id = "ajeuep7grfuk9o8e2vid" # ID ресурса Key, который принадлежит сервисному аккаунту.
-token_ttl = 600
+
+service_account_id = os.environ['ACC_ID']
+key_id = os.environ['KEY_ID'] # ID ресурса Key, который принадлежит сервисному аккаунту.
+token_ttl = 3600
 
 with open("private.pem", 'r') as private:
   private_key = private.read() # Чтение закрытого ключа из файла.
 
+token = ""
+last_update = 0
+
 def jwtiam():
+    global token, last_update
     now = int(time.time())
+    if now-last_update <= token_ttl-10:
+      return token
     payload = {
             'aud': 'https://iam.api.cloud.yandex.net/iam/v1/tokens',
             'iss': service_account_id,
@@ -28,6 +36,7 @@ def jwtiam():
     r = requests.post("https://iam.api.cloud.yandex.net/iam/v1/tokens", json={"jwt": et})
     obj = r.json()
     iamt = obj["iamToken"]
-    return iamt
-
-print(jwtiam())
+    token = iamt
+    last_update = now
+    print(token)
+    return token

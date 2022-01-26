@@ -1,20 +1,17 @@
 import os
-from flask import Flask, flash, request, redirect, url_for, jsonify
-from werkzeug.utils import secure_filename
+from flask import Flask, request, jsonify
 from cumspeech import cmspch
 
 UPLOAD_FOLDER = 'uploads'
-
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['JSON_AS_ASCII'] = False
 
-def allowed_file(filename: str):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() == "ogg"
-
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
+    def allowed_file(filename: str):
+        return '.' in filename and filename.rsplit('.', 1)[1].lower() == "ogg"
     if request.method == 'POST':
         if 'booze' not in request.files:
             return jsonify({"error":"poshel nahui"}), 200
@@ -22,7 +19,6 @@ def upload_file():
         if file.filename == '':
             return jsonify({"error":"poshel v pizdu"}), 200
         if file and allowed_file(file.filename):
-            # filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], "speech.ogg"))
             txt = cmspch()
             return jsonify({"result":txt})
