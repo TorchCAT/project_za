@@ -6,7 +6,7 @@ import os
 
 service_account_id = os.environ['ACC_ID']
 key_id = os.environ['KEY_ID'] # ID ресурса Key, который принадлежит сервисному аккаунту.
-token_ttl = 3600
+token_ttl = 600
 
 with open("private.pem", 'r') as private:
   private_key = private.read() # Чтение закрытого ключа из файла.
@@ -35,8 +35,8 @@ def jwtiam():
     et = str(encoded_token.decode('utf8'))
     r = requests.post("https://iam.api.cloud.yandex.net/iam/v1/tokens", json={"jwt": et})
     obj = r.json()
+    print(obj)
     iamt = obj["iamToken"]
     token = iamt
     last_update = now
-    print(token)
     return token
