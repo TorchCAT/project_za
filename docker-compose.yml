@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  backend:
+    build: .
+    stop_signal: SIGINT
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    volumes:
+      - ./private.pem:/app/private.pem
+      - ./uploads:/app/uploads

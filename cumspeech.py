@@ -11,5 +11,6 @@ def cmspch():
     file = open('uploads/speech.ogg', "rb")
     r = requests.post(f"https://stt.api.cloud.yandex.net/speech/v1/stt:recognize?folderId={FOLDER_ID}", headers=headers, data = file)
     obj = r.json()
+    print(obj)
     txt = obj['result']
     return txt
