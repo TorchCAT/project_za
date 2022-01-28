@@ -10,3 +10,5 @@ services:
     volumes:
       - ./private.pem:/app/private.pem
       - ./uploads:/app/uploads
+    environment:
+      - PYTHONUNBUFFERED=1

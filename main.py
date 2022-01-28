@@ -14,15 +14,15 @@ def upload_file():
         return '.' in filename and filename.rsplit('.', 1)[1].lower() == "ogg"
     if request.method == 'POST':
         if 'booze' not in request.files:
-            return jsonify({"error":"poshel nahui"}), 200
+            return jsonify({"error":"poshel nahui"}), 501
         file = request.files['booze']
         if file.filename == '':
-            return jsonify({"error":"poshel v pizdu"}), 200
+            return jsonify({"error":"poshel v pizdu"}), 502
         if file and allowed_file(file.filename):
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], "speech.ogg"))
             txt = cmspch()
             return jsonify({"result":txt})
-        return jsonify({"error":"hacker"}), 200
+        return jsonify({"error":"hacker"}), 503
     return '''
     <!doctype html>
     <title>Upload new File</title>
