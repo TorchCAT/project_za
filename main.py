@@ -1,6 +1,7 @@
 import os
 from flask import Flask, request, jsonify
 from cumspeech import cmspch
+import requests
 
 UPLOAD_FOLDER = 'uploads'
 
@@ -19,7 +20,11 @@ def upload_file():
         if file.filename == '':
             return jsonify({"error":"poshel v pizdu"}), 502
         if file and allowed_file(file.filename):
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], "speech.ogg"))
+            input_path = os.path.join(app.config['UPLOAD_FOLDER'], "speech_input.webm")
+            out_path = os.path.join(app.config['UPLOAD_FOLDER'], "speech.ogg")
+            file.save(input_path)
+            # os.system(f'mkvextract {filepath} tracks --raw 0:speech.ogg')
+            requests.post('http://converter:4000/ffmpeg', json={'args': ['-i', input_path, '-c:a', 'libopus', out_path]})
             txt = cmspch()
             return jsonify({"result":txt})
         return jsonify({"error":"hacker"}), 503
