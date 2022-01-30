@@ -12,6 +12,6 @@ Fill in the `.env.` file with your folder and account ids.
 Start with `docker-compose up`
 
 ### TODO:
-- add authorization
-- support concurrent user requests
-- add frontend
+- [ ] add authorization
+- [ ] support concurrent user requests
+- [x] add frontend
