@@ -1,6 +1,7 @@
 version: '3.9'
 services:
   converter:
+    stop_signal: SIGINT
     build: ./converter
     volumes:
       - ./uploads:/app/uploads
