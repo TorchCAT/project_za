@@ -2,7 +2,7 @@ FROM node:16-alpine AS builder
 RUN apk add git
 RUN git clone https://github.com/lycanru/za_record
 WORKDIR /za_record
-RUN yarn install --frozen-lockfile
+RUN npm install
 # COPY . .
 RUN npm run build
 #RUN ./node_modules/next/dist/bin/next export
