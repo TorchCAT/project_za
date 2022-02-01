@@ -24,6 +24,5 @@ jobs:
           REMOTE_HOST: renamon.fedorg.net
           REMOTE_USER: dvoell
           TARGET: '/home/dvoell/testass/'
-      - run: cd /home/dvoell/testass/
-      - name: docker cumpot run
-        run: docker-compose up --build
+          script: docker_cumpot
+         
