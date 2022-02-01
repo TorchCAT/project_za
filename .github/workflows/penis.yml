@@ -24,5 +24,13 @@ jobs:
           REMOTE_HOST: renamon.fedorg.net
           REMOTE_USER: dvoell
           TARGET: '/home/dvoell/testass/'
-          script: docker_cumpot
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+           host: renamon.fedorg.net
+           username: dvoell
+           key: ${{ secrets.SERVER_SSH_KEY }}
+           script: |
+            cd testass/
+            ./docker_cumpot.sh
          
