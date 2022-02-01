@@ -1,2 +1,2 @@
 cd ~/testass
-docker-compose up --build --force-recreate
+/home/dvoell/.local/bin/docker-compose up --build --force-recreate
