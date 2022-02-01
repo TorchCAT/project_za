@@ -30,7 +30,7 @@ def upload_file():
         # os.system(f'mkvextract {filepath} tracks --raw 0:speech.ogg')
         requests.post('http://converter:4000/ffmpeg', json={'args': ['-y', '-i', input_path, '-c:a', 'libopus', out_path]})
         txt = cmspch()
-        return jsonify({"result":txt})
+        return jsonify(txt)
     return jsonify({"error":"hacker"}), 503
 
 @app.route('/_next/<path:next>', methods=['GET'])

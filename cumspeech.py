@@ -15,5 +15,5 @@ def cmspch():
     now = int(time.time())
     obj['date'] = now
     print(obj)
-    txt = obj['result','date']
+    txt = obj
     return txt
