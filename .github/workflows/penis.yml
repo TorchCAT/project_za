@@ -32,5 +32,5 @@ jobs:
            key: ${{ secrets.SERVER_SSH_KEY }}
            script: |
             cd testass/
-            docker_cumpot.sh
+            ./docker_cumpot.sh
          
