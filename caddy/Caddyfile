@@ -1,0 +1,3 @@
+renamon.fedorg.net {
+    reverse_proxy backend:5000
+}
