@@ -5,7 +5,6 @@ volumes:
   vmagentdata: {}
 services:
   vmagent:
-    container_name: vmagent
     restart: always
     image: victoriametrics/vmagent
     depends_on:
