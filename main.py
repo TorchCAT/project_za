@@ -47,5 +47,5 @@ def pizdaebanaja(next):
     # </form>
     # '''
 @app.route('/auetest', methods=["GET"])
-def index():
+def auetest():
     return jsonify({"success":"test"}), 200
