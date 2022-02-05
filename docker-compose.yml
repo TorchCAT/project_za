@@ -9,13 +9,15 @@ services:
             - ./caddy/Caddyfile:/etc/caddy/Caddyfile
   converter:
     stop_signal: SIGINT
-    build: ./converter
+    image: project_za_converter
+    # build: ./converter
     volumes:
       - ./uploads:/app/uploads
     environment:
       - PYTHONUNBUFFERED=1
   backend:
-    build: .
+    # build: .
+    image: project_za_backend
     stop_signal: SIGINT
     env_file:
       - .env
