@@ -2,3 +2,4 @@ flask==2.0.2
 pyjwt[crypto]==1.7.1
 requests==2.22.0
 python-dotenv==0.19.2
+prometheus-flask-exporter==0.18.7
