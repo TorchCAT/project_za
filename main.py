@@ -46,3 +46,6 @@ def pizdaebanaja(next):
     #   <input type=submit value=Upload>
     # </form>
     # '''
+@app.route('/auetest', methods=["GET"])
+def index():
+    return jsonify({"error":"test"}), 200
