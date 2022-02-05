@@ -1,6 +1,7 @@
 version: '3.9'
 services:
   caddy:
+    restart: always
     image: caddy:2.4.6-alpine
     ports:
             - "80:80"
@@ -8,16 +9,18 @@ services:
     volumes:
             - ./caddy/Caddyfile:/etc/caddy/Caddyfile
   converter:
+    restart: always
     stop_signal: SIGINT
-    image: project_za_converter
+    image: dvoell/project_za_converter
     # build: ./converter
     volumes:
       - ./uploads:/app/uploads
     environment:
       - PYTHONUNBUFFERED=1
   backend:
+    restart: always
     # build: .
-    image: project_za_backend
+    image: dvoell/project_za_backend
     stop_signal: SIGINT
     env_file:
       - .env
