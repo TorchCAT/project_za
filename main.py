@@ -48,4 +48,4 @@ def pizdaebanaja(next):
     # '''
 @app.route('/auetest', methods=["GET"])
 def index():
-    return jsonify({"error":"test"}), 200
+    return jsonify({"success":"test"}), 200
