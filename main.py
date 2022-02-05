@@ -26,7 +26,6 @@ def index():
 def upload_file():
     global requests_speech, requests_speech_success
     requests_speech = requests_speech+1
-
     def allowed_file(filename: str):
         return '.' in filename and filename.rsplit('.', 1)[1].lower() == "ogg"
     if 'booze' not in request.files:
@@ -65,4 +64,10 @@ def pizdaebanaja(next):
 
 @app.route('/metrics', methods=["GET"])
 def metrics():
-    return jsonify({"requests_main": requests_main, "requests_speech": requests_speech, "requests_speech_success": requests_speech_success}), 200
+    return f"""
+# TYPE projectza_requests counter
+projectza_requests_failed{{endpoint="/speech",success="0"}} {requests_speech-requests_speech_success}
+projectza_requests{{endpoint="/speech",success="1"}} {requests_speech_success}
+projectza_requests{{endpoint="/"}} {requests_main}
+"""
+    # return jsonify({"requests_main": requests_main, "requests_speech": requests_speech, "requests_speech_success": requests_speech_success}), 200
